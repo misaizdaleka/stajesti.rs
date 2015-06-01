@@ -3,7 +3,7 @@
 /**
  * @name restaurantsApp
  */
-angular
+var staJesti = angular
   .module('restaurantsApp', [
     'restaurantsServices',
     'restaurantsFilters',
@@ -29,3 +29,9 @@ angular
         redirectTo: '/'
       });
   });
+
+staJesti.run(function ($rootScope, $modalStack) {
+  $rootScope.$on('$routeChangeSuccess', function (newVal, oldVal) {
+    oldVal !== newVal && $modalStack.dismissAll();
+  });
+});
